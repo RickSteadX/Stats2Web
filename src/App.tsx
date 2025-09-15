@@ -14,10 +14,17 @@ interface MilitaryDataItem {
   destroyedCell: string;
 }
 
+interface MilitaryDataItemIntel {
+  icon: React.ForwardRefExoticComponent<Omit<LucideProps, "ref"> & React.RefAttributes<SVGSVGElement>>;
+  name: string;
+  data: number;
+  dataCell: string;
+}
+
 const initialMilitaryData: MilitaryDataItem[] = [
   { icon: Target, name: "ОС РОВ", hit: 0, destroyed: 1, hitCell: "B2", destroyedCell: "C2" },
   { icon: Target, name: "Точки вильоту дронів", hit: 0, destroyed: 0, hitCell: "B3", destroyedCell: "C3" },
-  { icon: Zap, name: "Антени вор. екіпажів", hit: 0, destroyed: 0, hitCell: "B4", destroyedCell: "C4" },
+  { icon: Zap, name: "Антени ворога", hit: 0, destroyed: 0, hitCell: "B4", destroyedCell: "C4" },
   { icon: Building2, name: "Ворожі крила", hit: 0, destroyed: 0, hitCell: "B5", destroyedCell: "C5" },
   { icon: Car, name: "Танки", hit: 0, destroyed: 0, hitCell: "B6", destroyedCell: "C6" },
   { icon: Truck, name: "ББМ, БМП, БТР", hit: 0, destroyed: 0, hitCell: "B7", destroyedCell: "C7" },
@@ -27,10 +34,7 @@ const initialMilitaryData: MilitaryDataItem[] = [
   { icon: Truck, name: "РСЗВ, ЗРК, ЗУ", hit: 0, destroyed: 0, hitCell: "B11", destroyedCell: "C11" },
   { icon: Car, name: "ЛАТ, ВАТ, спец. та інж. техніка, паливозапр.", hit: 0, destroyed: 0, hitCell: "B12", destroyedCell: "C12" },
   { icon: Car, name: "Мотоцикли", hit: 0, destroyed: 0, hitCell: "B13", destroyedCell: "C13" },
-  { icon: Car, name: "Баггі військові", hit: 0, destroyed: 0, hitCell: "B14", destroyedCell: "C14" }
-];
-
-const initialAdditionalData: MilitaryDataItem[] = [
+  { icon: Car, name: "Баггі військові", hit: 0, destroyed: 0, hitCell: "B14", destroyedCell: "C14" },
   { icon: Building2, name: "Склади", hit: 0, destroyed: 0, hitCell: "E2", destroyedCell: "F2" },
   { icon: Building2, name: "Стратегічна інфрастр.", hit: 0, destroyed: 0, hitCell: "E3", destroyedCell: "F3" },
   { icon: Shield, name: "Укриття", hit: 0, destroyed: 0, hitCell: "E4", destroyedCell: "F4" },
@@ -38,7 +42,35 @@ const initialAdditionalData: MilitaryDataItem[] = [
   { icon: Building2, name: "Мережеве обладнання", hit: 0, destroyed: 0, hitCell: "E6", destroyedCell: "F6" },
   { icon: Target, name: "Ворожі коптери", hit: 0, destroyed: 0, hitCell: "E7", destroyedCell: "F7" },
   { icon: Car, name: "Ворожі НРК", hit: 0, destroyed: 0, hitCell: "E8", destroyedCell: "F8" },
-  { icon: Zap, name: "Інше", hit: 0, destroyed: 0, hitCell: "E9", destroyedCell: "F9" }
+  { icon: Target, name: "Інше", hit: 0, destroyed: 0, hitCell: "E9", destroyedCell: "F9" },
+  { icon: Zap, name: "БПЛА \"Молнія\"", hit: 0, destroyed: 0, hitCell: "E10", destroyedCell: "F10" },
+  { icon: Bomb, name: "БПЛА \"Ланцет\"", hit: 0, destroyed: 0, hitCell: "E11", destroyedCell: "F11" }
+];
+
+const initialAdditionalData: MilitaryDataItemIntel[] = [
+  { icon: Target, name: "Корегування", data: 0, dataCell: "E27" },
+  { icon: Target, name: "ОС РОВ", data: 0, dataCell: "B19" },
+  { icon: Target, name: "Точки вильоту дронів", data: 0, dataCell: "B20" },
+  { icon: Target, name: "Антени ворога", data: 0, dataCell: "B21" },
+  { icon: Target, name: "Ворожі крила", data: 0, dataCell: "B22" },
+  { icon: Target, name: "Танки", data: 0, dataCell: "B23" },
+  { icon: Target, name: "ББМ, БМП, БТР", data: 0, dataCell: "B24" },
+  { icon: Target, name: "Гармати, гаубиці", data: 0, dataCell: "B25" },
+  { icon: Target, name: "САУ", data: 0, dataCell: "B26" },
+  { icon: Target, name: "Міномети", data: 0, dataCell: "B27" },
+  { icon: Target, name: "РСЗВ, ЗРК, ЗУ", data: 0, dataCell: "B28" },
+  { icon: Target, name: "ЛАТ, ВАТ, спец. та інж. техніка, паливозапр.", data: 0, dataCell: "B29" },
+  { icon: Target, name: "Мотоцикли", data: 0, dataCell: "B30" },
+  { icon: Target, name: "Баггі військові", data: 0, dataCell: "B31" },
+  { icon: Target, name: "Склади", data: 0, dataCell: "E19" },
+  { icon: Target, name: "Стратегічна інфрастр.", data: 0, dataCell: "E20" },
+  { icon: Target, name: "Укриття", data: 0, dataCell: "E21" },
+  { icon: Target, name: "Бліндажі", data: 0, dataCell: "E22" },
+  { icon: Target, name: "Мережеве обладнання", data: 0, dataCell: "E23" },
+  { icon: Target, name: "Ворожі коптери", data: 0, dataCell: "E24" },
+  { icon: Target, name: "Ворожі НРК", data: 0, dataCell: "E25" },
+  { icon: Target, name: "Інше", data: 0, dataCell: "E26" },
+  
 ];
 
 const unitBadges = [
@@ -70,13 +102,15 @@ interface DateValueItem {
 
 // Add initial summary values with cell references
 const initialSummaryValues: SummaryValueItem[] = [
-  { value: 201, cell: "A68" },   // OS РОВ
-  { value: 102, cell: "B68" },   // Destroyed
-  { value: 99, cell: "C68" },    // Wounded
-  { value: 753, cell: "B71" },    // Total hits
-  { value: 1000, cell: "B74" },    // Total
-  { value: 228, cell: "B75" },    // Total OS
+  { value: 13, cell: "B33" },    // Total flights
+  { value: 8, cell: "B15" },    // Total hit day
+  { value: 12, cell: "I4" },    // Total hit month
+  { value: 5, cell: "I5" },    // Total hit month OS
 ];
+
+const lastPageValues: SummaryValueItem[] = [
+
+]
 
 // Add initial date values with cell references
 const initialDateValues: DateValueItem[] = [
@@ -196,8 +230,7 @@ export default function App() {
 
       const newAdditionalData = initialAdditionalData.map(item => ({
         ...item,
-        hit: getCellValue(item.hitCell),
-        destroyed: getCellValue(item.destroyedCell),
+        data: getCellValue(item.dataCell),
       }));
       
       // Update summary values from Excel cells using the cell references
@@ -467,7 +500,7 @@ export default function App() {
                     РОЗВІДДОНЕСЕННЯ
                   </h1>
                   <div className="text-lg font-bold text-emerald-400 tracking-widest mt-1 font-['JetBrains_Mono']">
-                    ЗА ДОБУ
+                    ВПС (тип С) РУБпАК 79 ПрикЗ
                   </div>
                 </div>
               </div>
@@ -495,39 +528,34 @@ export default function App() {
             <div className="h-full flex flex-col p-4">
               {/* Top Statistics */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-                {/* Three Key Stats */}
-                <div className="bg-gradient-to-br from-emerald-800/60 to-slate-800/50 border-2 border-emerald-400/60 rounded-xl p-4 shadow-2xl relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/5 to-transparent"></div>
-                  <div className="relative z-10 grid grid-cols-3 gap-6 text-center h-full">
-                    <div className="flex flex-col justify-center">
-                      <div className="text-4xl font-black text-emerald-100 mb-2 font-['JetBrains_Mono']">{getSummaryValue(0)}</div>
-                      <div className="text-emerald-400 font-bold text-sm font-['JetBrains_Mono']">ОС РОВ</div>
-                    </div>
-                    <div className="flex flex-col justify-center border-x border-emerald-400/30 px-4">
-                      <div className="text-4xl font-black text-emerald-100 mb-2 font-['JetBrains_Mono']">{getSummaryValue(1)}</div>
-                      <div className="text-emerald-400 font-bold text-sm font-['JetBrains_Mono']">в т. ч. знищено</div>
-                    </div>
-                    <div className="flex flex-col justify-center">
-                      <div className="text-4xl font-black text-emerald-100 mb-2 font-['JetBrains_Mono']">{getSummaryValue(2)}</div>
-                      <div className="text-emerald-400 font-bold text-sm font-['JetBrains_Mono']">в т. ч. поранено</div>
-                    </div>
-                  </div>
-                </div>
 
                 {/* Large Stat with Description */}
                 <div className="bg-gradient-to-br from-slate-800/70 to-emerald-800/50 border-2 border-emerald-400/60 rounded-xl p-4 shadow-2xl relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/5 to-transparent"></div>
                   <div className="relative z-10 flex items-center justify-between h-full">
                     <div className="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-emerald-500 font-['JetBrains_Mono'] tracking-wider drop-shadow-2xl">
-                      {getSummaryValue(3)}
+                      {getSummaryValue(1)}
                     </div>
                     <div className="text-emerald-300 text-sm font-bold leading-relaxed font-['JetBrains_Mono'] text-right">
                       УНІКАЛЬНИХ УРАЖЕНЬ<br />
-                      ВОРОЖИХ ЦІЛЕЙ<br />
-                      ПРОТЯГОМ ДОБИ
+                      ВОРОЖИХ ЦІЛЕЙ
                     </div>
                   </div>
                 </div>
+                {/* Large Stat with Description */}
+                <div className="bg-gradient-to-br from-slate-800/70 to-emerald-800/50 border-2 border-emerald-400/60 rounded-xl p-4 shadow-2xl relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-br from-emerald-400/5 to-transparent"></div>
+                  <div className="relative z-10 flex items-center justify-between h-full">
+                    <div className="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-emerald-500 font-['JetBrains_Mono'] tracking-wider drop-shadow-2xl">
+                      {getSummaryValue(0)}
+                    </div>
+                    <div className="text-emerald-300 text-sm font-bold leading-relaxed font-['JetBrains_Mono'] text-right">
+                      БОЙОВИХ ВИЛЬОТІВ
+                    </div>
+                  </div>
+                </div>
+
+                
               </div>
 
               {/* Data Tables */}
@@ -535,13 +563,13 @@ export default function App() {
                 {/* Left Table */}
                 <div className="bg-slate-900/40 border border-emerald-400/40 rounded-xl p-5 backdrop-blur-sm flex flex-col min-h-0">
                   <div className="grid grid-cols-3 gap-4 mb-6 text-center border-b border-emerald-400/30 pb-3">
-                    <div></div>
+                    <div className="text-xs font-black tracking-wider text-emerald-100 font-['JetBrains_Mono'] uppercase">Ударні<br></br>системи</div>
                     <div className="text-emerald-300 font-bold font-['JetBrains_Mono'] text-lg">УРАЖЕНО</div>
                     <div className="text-emerald-300 font-bold font-['JetBrains_Mono'] text-lg">ЗНИЩЕНО</div>
                   </div>
                   <div className="space-y-2 overflow-y-auto scroll-smooth snap-y snap-mandatory" style={{scrollbarWidth: 'thin', scrollbarColor: 'rgba(16, 185, 129, 0.5) transparent'}}>
                     {militaryData.filter(item => item.hit > 0 || item.destroyed > 0).map((item, index) => (
-                      <div key={index} className={`grid grid-cols-3 gap-4 items-center py-3 border-b border-slate-700/30 hover:bg-emerald-400/5 rounded transition-colors snap-start ${index === 0 ? 'military-highlight' : ''}`}>
+                      <div key={index} className={`grid grid-cols-3 gap-4 items-center py-3 border-b border-slate-700/30 hover:bg-emerald-400/5 rounded transition-colors snap-start`}>
                         <div className="flex items-center gap-3">
                           <item.icon className="w-5 h-5 text-emerald-400 flex-shrink-0" />
                           <span className="font-['Inter'] text-sm text-emerald-100">{item.name}</span>
@@ -556,19 +584,19 @@ export default function App() {
                 {/* Right Table */}
                 <div className="bg-slate-900/40 border border-emerald-400/40 rounded-xl p-5 backdrop-blur-sm flex flex-col min-h-0">
                   <div className="grid grid-cols-3 gap-4 mb-6 text-center border-b border-emerald-400/30 pb-3">
-                    <div></div>
-                    <div className="text-emerald-300 font-bold font-['JetBrains_Mono'] text-lg">УРАЖЕНО</div>
-                    <div className="text-emerald-300 font-bold font-['JetBrains_Mono'] text-lg">ЗНИЩЕНО</div>
+                    <div className="text-xs font-black tracking-wider text-emerald-100 font-['JetBrains_Mono'] uppercase">Розвідувальні<br></br>системи</div>
+                    <div className="text-emerald-300 font-bold font-['JetBrains_Mono'] text-lg"></div>
+                    <div className="text-emerald-300 font-bold font-['JetBrains_Mono'] text-lg">ВИЯВЛЕНО</div>
                   </div>
                   <div className="space-y-2 overflow-y-auto scroll-smooth snap-y snap-mandatory" style={{scrollbarWidth: 'thin', scrollbarColor: 'rgba(16, 185, 129, 0.5) transparent'}}>
-                    {additionalData.filter(item => item.hit > 0 || item.destroyed > 0).map((item, index) => (
-                      <div key={index} className="grid grid-cols-3 gap-4 items-center py-3 border-b border-slate-700/30 hover:bg-emerald-400/5 rounded transition-colors snap-start">
+                    {additionalData.filter(item => item.data > 0).map((item, index) => (
+                      <div key={index} className={`grid grid-cols-3 gap-4 items-center py-3 border-b border-slate-700/30 hover:bg-emerald-400/5 rounded transition-colors snap-start`}>
                         <div className="flex items-center gap-3">
                           <item.icon className="w-5 h-5 text-emerald-400 flex-shrink-0" />
                           <span className="font-['Inter'] text-sm text-emerald-100">{item.name}</span>
                         </div>
-                        <div className="text-center text-2xl font-black text-emerald-200 font-['JetBrains_Mono']">{item.hit}</div>
-                        <div className="text-center text-2xl font-black text-amber-400 font-['JetBrains_Mono']">{item.destroyed}</div>
+                        <div className="text-center text-2xl font-black text-emerald-200 font-['JetBrains_Mono']"></div>
+                        <div className="text-center text-2xl font-black text-emerald-200 font-['JetBrains_Mono']">{item.data}</div>
                       </div>
                     ))}
                   </div>
@@ -578,19 +606,19 @@ export default function App() {
               {/* Summary Section */}
               <div className="mt-4 bg-gradient-to-r from-slate-900/50 to-emerald-900/40 border border-emerald-400/40 rounded-xl p-4 backdrop-blur-sm">
                 <h3 className="text-lg mb-4 font-['JetBrains_Mono'] font-bold text-emerald-200">
-                  ВСЬОГО <span className="text-emerald-400">УНІКАЛЬНИХ УРАЖЕНЬ</span><br />
-                  ПРОТЯГОМ ВЕРЕСНЯ (01-04.09):
+                  ВСЬОГО <span className="text-emerald-400">УНІКАЛЬНИХ УРАЖЕНЬ </span>
+                  ПРОТЯГОМ ВЕРЕСНЯ
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="flex items-center gap-4 bg-slate-800/30 p-3 rounded-lg">
                     <Target className="w-6 h-6 text-emerald-400" />
                     <span className="font-['Inter'] font-bold text-emerald-200 text-sm">Ворожих цілей</span>
-                    <div className="ml-auto text-3xl font-black text-emerald-300 font-['JetBrains_Mono']">{getSummaryValue(4)}</div>
+                    <div className="ml-auto text-3xl font-black text-emerald-300 font-['JetBrains_Mono']">{getSummaryValue(3)}</div>
                   </div>
                   <div className="flex items-center gap-4 bg-slate-800/30 p-3 rounded-lg">
                     <Users className="w-6 h-6 text-emerald-400" />
                     <span className="font-['Inter'] font-bold text-emerald-200 text-sm">Особового складу</span>
-                    <div className="ml-auto text-3xl font-black text-amber-400 font-['JetBrains_Mono']">{getSummaryValue(5)}</div>
+                    <div className="ml-auto text-3xl font-black text-amber-400 font-['JetBrains_Mono']">{getSummaryValue(2)}</div>
                   </div>
                 </div>
               </div>
